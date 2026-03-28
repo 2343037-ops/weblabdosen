@@ -7,7 +7,7 @@
    HERO BANNER
    ══════════════════════════════════════════════════════════ */
 .dash-hero {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
     border-radius: 14px;
     padding: 24px;
     color: #fff;
@@ -324,6 +324,7 @@
 .btn .ripple-el { position: absolute; border-radius: 50%; background: rgba(255,255,255,.25); transform: scale(0); animation: ripple .5s linear; pointer-events: none }
 .btn-dark  { background: #1e293b; color: #fff }
 .btn-dark:hover  { background: #334155 }
+.btn-dark:active { transform: scale(0.95); }
 .btn-green { background: #16a34a; color: #fff }
 .btn-green:hover { background: #15803d }
 .btn-red   { background: #be123c; color: #fff }
