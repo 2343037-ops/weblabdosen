@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadwal Dosen — Lab Komputer STMIK Widya Cipta Dharma</title>
+    <title>Informasi keberadaan Dosen Lab Komputer STMIK Widya Cipta Dharma</title>
     <meta name="description"
         content="Informasi jadwal dan status keberadaan dosen Lab Komputer STMIK Widya Cipta Dharma Samarinda">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
@@ -21,7 +21,7 @@
         <div class="mx">
             <div class="hdr-in">
                 <div class="hdr-l">
-                    <div class=""><i class="lucide-calendar-days"></i></div>
+                    <div class="hdr-ico"><i class="lucide-calendar-days"></i></div>
                     <div>
                         <h1>Informasi keberadaan Dosen Lab Komputer</h1>
                         <p class="sub">STMIK Widya Cipta Dharma, Samarinda</p>
@@ -95,29 +95,29 @@
                 ]);
             @endphp
             <div class="db" id="dosen-{{ $idx }}" x-data="{
-                                                                openW: false,
-                                                                cari: '',
-                                                                searching: false,
-                                                                hariCari: '',
-                                                                tglLabel: '',
-                                                                mingguanFiltered: [],
-                                                                akanDatangFiltered: [],
-                                                                dadakanFiltered: [],
-                                                                doSearch() {
-                                                                    if (!this.cari) { this.searching = false; return; }
-                                                                    this.searching = true;
-                                                                    let [y,m,dd] = this.cari.split('-').map(Number); let d = new Date(y, m-1, dd);
-                                                                    let days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-                                                                    this.hariCari = days[d.getDay()];
-                                                                    this.tglLabel = this.hariCari + ', ' + dd + ' ' + ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'][m-1] + ' ' + y;
+                                                                        openW: false,
+                                                                        cari: '',
+                                                                        searching: false,
+                                                                        hariCari: '',
+                                                                        tglLabel: '',
+                                                                        mingguanFiltered: [],
+                                                                        akanDatangFiltered: [],
+                                                                        dadakanFiltered: [],
+                                                                        doSearch() {
+                                                                            if (!this.cari) { this.searching = false; return; }
+                                                                            this.searching = true;
+                                                                            let [y,m,dd] = this.cari.split('-').map(Number); let d = new Date(y, m-1, dd);
+                                                                            let days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+                                                                            this.hariCari = days[d.getDay()];
+                                                                            this.tglLabel = this.hariCari + ', ' + dd + ' ' + ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'][m-1] + ' ' + y;
 
-                                                                    let ds = this.cari;
-                                                                    this.mingguanFiltered = @js($dosen->jadwalMingguan).filter(j => j.hari === this.hariCari);
-                                                                    this.akanDatangFiltered = @js($jadwalAkanDatangJs).filter(j => ds >= j.tanggal_mulai && ds <= j.tanggal_selesai);
-                                                                    this.dadakanFiltered = @js($jadwalDadakanJs).filter(j => ds >= j.tanggal_mulai && ds <= j.tanggal_selesai);
-                                                                },
-                                                                resetSearch() { this.cari = ''; this.searching = false; }
-                                                            }">
+                                                                            let ds = this.cari;
+                                                                            this.mingguanFiltered = @js($dosen->jadwalMingguan).filter(j => j.hari === this.hariCari);
+                                                                            this.akanDatangFiltered = @js($jadwalAkanDatangJs).filter(j => ds >= j.tanggal_mulai && ds <= j.tanggal_selesai);
+                                                                            this.dadakanFiltered = @js($jadwalDadakanJs).filter(j => ds >= j.tanggal_mulai && ds <= j.tanggal_selesai);
+                                                                        },
+                                                                        resetSearch() { this.cari = ''; this.searching = false; }
+                                                                    }">
                 <!-- Header -->
                 <div class="db-top">
                     <div class="di">
