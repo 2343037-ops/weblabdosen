@@ -1,0 +1,3 @@
+# 
+
+[{"nama":"Ivan Haristyawan, S.T., M.M.","nidn":"1108117701","jabatan":"Kepala Lab","status":"Tidak Di Ruangan"},{"nama":"Ahmad Fajri, S.Kom., M.Kom","nidn":"1116088202","jabatan":"Staf Lab","status":"Tidak Di Ruangan"},{"nama":"Rizki Galang Rahmadani, S.Kom., M.Kom","nidn":"1116088201","jabatan":"Staf Lab","status":"Tidak Di Ruangan"}]

@@ -1,0 +1,42 @@
+[
+    [
+        "Skenario 1: Tanpa jadwal (Selasa 10:00)",
+        "Ekspektasi: Di Ruangan",
+        "Realita: Di Ruangan"
+    ],
+    [
+        "Skenario 2: Tambah Mingguan (Aktif 09:00-11:00)",
+        "Ekspektasi: Tidak Di Ruangan",
+        "Realita: Tidak Di Ruangan"
+    ],
+    [
+        "Skenario 3: Edit Mingguan (Tidak aktif 13:00-15:00)",
+        "Ekspektasi: Di Ruangan",
+        "Realita: Di Ruangan"
+    ],
+    [
+        "Skenario 4: Tambah Akan Datang (Fullday)",
+        "Ekspektasi: Tidak Di Ruangan",
+        "Realita: Tidak Di Ruangan"
+    ],
+    [
+        "Skenario 5: Edit Akan Datang (Jam 15:00)",
+        "Ekspektasi: Di Ruangan",
+        "Realita: Di Ruangan"
+    ],
+    [
+        "Skenario 6: Mode Manual Edit Jadwal",
+        "Ekspektasi: Tidak Di Ruangan",
+        "Realita: Tidak Di Ruangan"
+    ],
+    [
+        "Skenario 7: Tambah Dadakan (Aktif)",
+        "Ekspektasi: Tidak Di Ruangan",
+        "Realita: Tidak Di Ruangan"
+    ],
+    [
+        "Skenario 8: Edit Dadakan (Selesai)",
+        "Ekspektasi: Di Ruangan",
+        "Realita: Di Ruangan"
+    ]
+]
