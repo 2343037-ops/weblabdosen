@@ -1151,3 +1151,13 @@ body {
         align-items: flex-start
     }
 }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVENESS (TABLE)
+   ══════════════════════════════════════════════════════════ */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+}

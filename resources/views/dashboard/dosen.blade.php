@@ -2,7 +2,7 @@
 @section('title', 'Dashboard Dosen')
 
 @push('styles')
-<link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 @endpush
 
 @section('content')
@@ -47,7 +47,8 @@
                 <i class="lucide-zap" style="font-size:14px"></i>
                 <div>
                     <strong>Mode Otomatis Aktif</strong>
-                    <p>Status diperbarui otomatis berdasarkan jadwal. Jam kerja: 08:00 – 17:00 WITA. Di luar jam kerja = Tidak Di Ruangan.</p>
+                    <p>Status diperbarui otomatis berdasarkan jadwal. Jam kerja: 08:00 – 17:00 WITA. Di luar jam kerja = Tidak
+                        Di Ruangan.</p>
                 </div>
             </div>
             <div style="display:flex;align-items:center;gap:8px;margin-top:12px">
@@ -68,9 +69,11 @@
                 @csrf
                 <select name="status">
                     <option value="Di Ruangan" {{ ($dosen->status ?? '') === 'Di Ruangan' ? 'selected' : '' }}>Di Ruangan</option>
-                    <option value="Tidak Di Ruangan" {{ ($dosen->status ?? '') === 'Tidak Di Ruangan' ? 'selected' : '' }}>Tidak Di Ruangan</option>
+                    <option value="Tidak Di Ruangan" {{ ($dosen->status ?? '') === 'Tidak Di Ruangan' ? 'selected' : '' }}>Tidak
+                        Di Ruangan</option>
                 </select>
-                <button type="submit" class="btn btn-dark"><i class="lucide-refresh-cw" style="font-size:12px"></i> Perbarui</button>
+                <button type="submit" class="btn btn-dark"><i class="lucide-refresh-cw" style="font-size:12px"></i>
+                    Perbarui</button>
             </form>
         @endif
 
@@ -82,7 +85,10 @@
     <!-- ═══ WHATSAPP PROFIL ═══ -->
     <div class="wa-box">
         <h3>
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#25D366">
+                <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+            </svg>
             Nomor WhatsApp Dosen
         </h3>
 
@@ -90,7 +96,10 @@
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap">
                 <span style="font-size:12px;color:#57534e;font-weight:600">Nomor aktif:</span>
                 <span class="wa-preview">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#16a34a"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#16a34a">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+                    </svg>
                     {{ $dosen->telepon }}
                 </span>
                 <span style="font-size:11px;color:#a8a29e">— Tombol WA sudah aktif di halaman publik</span>
@@ -99,24 +108,37 @@
 
         <form method="POST" action="{{ route('dosen.updateProfil') }}" class="wa-form">
             @csrf
-            <input type="tel" name="telepon"
-                   value="{{ $dosen->telepon ?? '' }}"
-                   placeholder="Contoh: 08123456789"
-                   maxlength="20">
+            <input type="tel" name="telepon" value="{{ $dosen->telepon ?? '' }}" placeholder="Contoh: 08123456789"
+                maxlength="20">
             <button type="submit" class="btn-wa-save">
-                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                    <polyline points="17 21 17 13 7 13 7 21" />
+                    <polyline points="7 3 7 8 15 8" />
+                </svg>
                 Simpan Nomor WA
             </button>
         </form>
 
         <div class="wa-hint">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-            Nomor ini akan ditampilkan sebagai tombol "Hubungi via WhatsApp" untuk mahasiswa di halaman publik. Kosongkan untuk menyembunyikan tombol.
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4" />
+                <path d="M12 8h.01" />
+            </svg>
+            Nomor ini akan ditampilkan sebagai tombol "Hubungi via WhatsApp" untuk mahasiswa di halaman publik. Kosongkan
+            untuk menyembunyikan tombol.
         </div>
 
         @if(session('success_profil'))
             <div class="status-msg" style="margin-top:10px">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
                 {{ session('success_profil') }}
             </div>
         @endif
@@ -124,18 +146,18 @@
 
     {{--
     ═══════════════════════════════════════════════════════════════
-      GLOBAL MODAL MANAGER — x-data diletakkan di wrapper terluar
-      sehingga HANYA SATU modal yang dapat terbuka di seluruh page.
-      openModal(type) menutup modal lama dan membuka modal baru.
+    GLOBAL MODAL MANAGER — x-data diletakkan di wrapper terluar
+    sehingga HANYA SATU modal yang dapat terbuka di seluruh page.
+    openModal(type) menutup modal lama dan membuka modal baru.
     ═══════════════════════════════════════════════════════════════
     --}}
     <div x-data="{
-        activeModal: null,
-        editData: {},
-        editFullday: true,
-        openModal(type) { this.activeModal = type; },
-        closeModal()   { this.activeModal = null; }
-    }">
+            activeModal: null,
+            editData: {},
+            editFullday: true,
+            openModal(type) { this.activeModal = type; },
+            closeModal()   { this.activeModal = null; }
+        }">
 
         <!-- ═══ JADWAL MINGGUAN ═══ -->
         <div class="sec">
@@ -150,6 +172,7 @@
             </div>
             <div class="sec-body">
                 @if($jadwalMingguan->count() > 0)
+                    <div class="table-responsive">
                     <table class="tbl">
                         <thead>
                             <tr>
@@ -175,11 +198,23 @@
                                             <div class="act-btns">
                                                 <button type="button" class="btn-edit"
                                                     @click="editData = { id: {{ $j->id }}, hari: '{{ $j->hari }}', jam_mulai: '{{ substr($j->jam_mulai, 0, 5) }}', jam_selesai: '{{ substr($j->jam_selesai, 0, 5) }}', kegiatan: '{{ $j->kegiatan }}', mata_kuliah: '{{ addslashes($j->mata_kuliah) }}', ruangan: '{{ addslashes($j->ruangan) }}', keterangan: '{{ addslashes($j->keterangan) }}' }; openModal('mingguanEdit')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                                        <path d="m15 5 4 4" />
+                                                    </svg>
                                                 </button>
-                                                <form method="POST" action="/jadwal-mingguan/{{ $j->id }}" onsubmit="return confirm('Hapus jadwal ini?')">
+                                                <form method="POST" action="/jadwal-mingguan/{{ $j->id }}"
+                                                    onsubmit="return confirm('Hapus jadwal ini?')">
                                                     @csrf @method('DELETE')
-                                                    <button type="submit" class="btn-del"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+                                                    <button type="submit" class="btn-del"><svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path d="M3 6h18" />
+                                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                        </svg></button>
                                                 </form>
                                             </div>
                                         </td>
@@ -188,6 +223,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 @else
                     <div class="sec-empty">Belum ada jadwal mingguan</div>
                 @endif
@@ -223,11 +259,22 @@
                             <div class="act-btns">
                                 <button type="button" class="btn-edit"
                                     @click="editData = { id: {{ $j->id }}, judul: '{{ addslashes($j->judul) }}', tanggal_mulai: '{{ $j->tanggal_mulai->format('Y-m-d') }}', tanggal_selesai: '{{ $j->tanggal_selesai->format('Y-m-d') }}', jam_mulai: '{{ $j->jam_mulai ? substr($j->jam_mulai, 0, 5) : '' }}', jam_selesai: '{{ $j->jam_selesai ? substr($j->jam_selesai, 0, 5) : '' }}', keterangan: '{{ addslashes($j->keterangan) }}' }; editFullday = {{ $j->is_fullday ? 'true' : 'false' }}; openModal('akanDatangEdit')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                        <path d="m15 5 4 4" />
+                                    </svg>
                                 </button>
-                                <form method="POST" action="/jadwal-akan-datang/{{ $j->id }}" onsubmit="return confirm('Hapus jadwal ini?')">
+                                <form method="POST" action="/jadwal-akan-datang/{{ $j->id }}"
+                                    onsubmit="return confirm('Hapus jadwal ini?')">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="btn-del"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+                                    <button type="submit" class="btn-del"><svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                            height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 6h18" />
+                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                        </svg></button>
                                 </form>
                             </div>
                         </div>
@@ -267,11 +314,22 @@
                             <div class="act-btns">
                                 <button type="button" class="btn-edit"
                                     @click="editData = { id: {{ $j->id }}, judul: '{{ addslashes($j->judul) }}', jam_selesai: '{{ $j->jam_selesai ? substr($j->jam_selesai, 0, 5) : '' }}', keterangan: '{{ addslashes($j->keterangan) }}' }; editFullday = {{ $j->is_fullday ? 'true' : 'false' }}; openModal('dadakanEdit')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                        <path d="m15 5 4 4" />
+                                    </svg>
                                 </button>
-                                <form method="POST" action="/jadwal-dadakan/{{ $j->id }}" onsubmit="return confirm('Hapus jadwal ini?')">
+                                <form method="POST" action="/jadwal-dadakan/{{ $j->id }}"
+                                    onsubmit="return confirm('Hapus jadwal ini?')">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="btn-del"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+                                    <button type="submit" class="btn-del"><svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                            height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 6h18" />
+                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                        </svg></button>
                                 </form>
                             </div>
                         </div>
@@ -283,9 +341,9 @@
         </div>
 
         {{-- ════════════════════════════════════════════
-             SEMUA MODAL ada di sini, dikelola oleh
-             activeModal pada x-data parent di atas.
-             Hanya 1 yang tampil pada waktu bersamaan.
+        SEMUA MODAL ada di sini, dikelola oleh
+        activeModal pada x-data parent di atas.
+        Hanya 1 yang tampil pada waktu bersamaan.
         ════════════════════════════════════════════ --}}
 
         <!-- ── Modal Tambah Mingguan ── -->
@@ -302,7 +360,7 @@
                             <label>Hari</label>
                             <select name="hari" required>
                                 <option value="">Pilih hari...</option>
-                                @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'] as $h)
+                                @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'] as $h)
                                     <option value="{{ $h }}">{{ $h }}</option>
                                 @endforeach
                             </select>
@@ -321,13 +379,17 @@
                                 <option value="Luar Kampus">Luar Kampus</option>
                             </select>
                         </div>
-                        <div class="fg"><label>Mata Kuliah</label><input type="text" name="mata_kuliah" placeholder="Contoh: Algoritma (TI/II/2/M)"></div>
-                        <div class="fg"><label>Ruangan</label><input type="text" name="ruangan" placeholder="Contoh: Ruang 3/5"></div>
-                        <div class="fg"><label>Keterangan</label><textarea name="keterangan" placeholder="Opsional"></textarea></div>
+                        <div class="fg"><label>Mata Kuliah</label><input type="text" name="mata_kuliah"
+                                placeholder="Contoh: Algoritma (TI/II/2/M)"></div>
+                        <div class="fg"><label>Ruangan</label><input type="text" name="ruangan"
+                                placeholder="Contoh: Ruang 3/5"></div>
+                        <div class="fg"><label>Keterangan</label><textarea name="keterangan"
+                                placeholder="Opsional"></textarea></div>
                     </div>
                     <div class="modal-foot">
                         <button type="button" class="btn-cancel" @click="closeModal()">Batal</button>
-                        <button type="submit" class="btn btn-dark"><i class="lucide-check" style="font-size:12px"></i> Simpan</button>
+                        <button type="submit" class="btn btn-dark"><i class="lucide-check" style="font-size:12px"></i>
+                            Simpan</button>
                     </div>
                 </form>
             </div>
@@ -337,7 +399,11 @@
         <div x-show="activeModal === 'mingguanEdit'" x-cloak class="modal-bg" @click.self="closeModal()">
             <div class="modal" @click.stop>
                 <div class="modal-head">
-                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg> Edit Jadwal Mingguan</h3>
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                            <path d="m15 5 4 4" />
+                        </svg> Edit Jadwal Mingguan</h3>
                     <button class="modal-close" @click="closeModal()"><i class="lucide-x"></i></button>
                 </div>
                 <form method="POST" :action="'/jadwal-mingguan/' + editData.id">
@@ -353,8 +419,10 @@
                             </select>
                         </div>
                         <div class="fg-row">
-                            <div class="fg"><label>Jam Mulai</label><input type="time" name="jam_mulai" required x-model="editData.jam_mulai"></div>
-                            <div class="fg"><label>Jam Selesai</label><input type="time" name="jam_selesai" required x-model="editData.jam_selesai"></div>
+                            <div class="fg"><label>Jam Mulai</label><input type="time" name="jam_mulai" required
+                                    x-model="editData.jam_mulai"></div>
+                            <div class="fg"><label>Jam Selesai</label><input type="time" name="jam_selesai" required
+                                    x-model="editData.jam_selesai"></div>
                         </div>
                         <div class="fg">
                             <label>Kegiatan</label>
@@ -366,20 +434,25 @@
                                 <option value="Luar Kampus">Luar Kampus</option>
                             </select>
                         </div>
-                        <div class="fg"><label>Mata Kuliah</label><input type="text" name="mata_kuliah" x-model="editData.mata_kuliah" placeholder="Contoh: Algoritma (TI/II/2/M)"></div>
-                        <div class="fg"><label>Ruangan</label><input type="text" name="ruangan" x-model="editData.ruangan" placeholder="Contoh: Ruang 3/5"></div>
-                        <div class="fg"><label>Keterangan</label><textarea name="keterangan" x-model="editData.keterangan" placeholder="Opsional"></textarea></div>
+                        <div class="fg"><label>Mata Kuliah</label><input type="text" name="mata_kuliah"
+                                x-model="editData.mata_kuliah" placeholder="Contoh: Algoritma (TI/II/2/M)"></div>
+                        <div class="fg"><label>Ruangan</label><input type="text" name="ruangan" x-model="editData.ruangan"
+                                placeholder="Contoh: Ruang 3/5"></div>
+                        <div class="fg"><label>Keterangan</label><textarea name="keterangan" x-model="editData.keterangan"
+                                placeholder="Opsional"></textarea></div>
                     </div>
                     <div class="modal-foot">
                         <button type="button" class="btn-cancel" @click="closeModal()">Batal</button>
-                        <button type="submit" class="btn btn-dark"><i class="lucide-check" style="font-size:12px"></i> Perbarui</button>
+                        <button type="submit" class="btn btn-dark"><i class="lucide-check" style="font-size:12px"></i>
+                            Perbarui</button>
                     </div>
                 </form>
             </div>
         </div>
 
         <!-- ── Modal Tambah Akan Datang ── -->
-        <div x-show="activeModal === 'akanDatangAdd'" x-cloak class="modal-bg" @click.self="closeModal()" x-data="{ fullday: true }">
+        <div x-show="activeModal === 'akanDatangAdd'" x-cloak class="modal-bg" @click.self="closeModal()"
+            x-data="{ fullday: true }">
             <div class="modal" @click.stop>
                 <div class="modal-head">
                     <h3><i class="lucide-calendar-clock" style="color:#7c3aed"></i> Tambah Jadwal Akan Datang</h3>
@@ -388,10 +461,13 @@
                 <form method="POST" action="/jadwal-akan-datang">
                     @csrf
                     <div class="modal-body">
-                        <div class="fg"><label>Judul Kegiatan</label><input type="text" name="judul" required placeholder="Contoh: Seminar AI, Workshop IoT"></div>
+                        <div class="fg"><label>Judul Kegiatan</label><input type="text" name="judul" required
+                                placeholder="Contoh: Seminar AI, Workshop IoT"></div>
                         <div class="fg-row">
-                            <div class="fg"><label>Tanggal Mulai</label><input type="date" name="tanggal_mulai" required></div>
-                            <div class="fg"><label>Tanggal Selesai</label><input type="date" name="tanggal_selesai" required></div>
+                            <div class="fg"><label>Tanggal Mulai</label><input type="date" name="tanggal_mulai" required>
+                            </div>
+                            <div class="fg"><label>Tanggal Selesai</label><input type="date" name="tanggal_selesai"
+                                    required></div>
                         </div>
                         <div class="fg-check">
                             <input type="checkbox" id="fd_add_u" x-model="fullday" checked>
@@ -402,11 +478,13 @@
                             <div class="fg"><label>Jam Mulai</label><input type="time" name="jam_mulai"></div>
                             <div class="fg"><label>Jam Selesai</label><input type="time" name="jam_selesai"></div>
                         </div>
-                        <div class="fg"><label>Keterangan</label><textarea name="keterangan" placeholder="Opsional"></textarea></div>
+                        <div class="fg"><label>Keterangan</label><textarea name="keterangan"
+                                placeholder="Opsional"></textarea></div>
                     </div>
                     <div class="modal-foot">
                         <button type="button" class="btn-cancel" @click="closeModal()">Batal</button>
-                        <button type="submit" class="btn btn-dark"><i class="lucide-check" style="font-size:12px"></i> Simpan</button>
+                        <button type="submit" class="btn btn-dark"><i class="lucide-check" style="font-size:12px"></i>
+                            Simpan</button>
                     </div>
                 </form>
             </div>
@@ -416,16 +494,23 @@
         <div x-show="activeModal === 'akanDatangEdit'" x-cloak class="modal-bg" @click.self="closeModal()">
             <div class="modal" @click.stop>
                 <div class="modal-head">
-                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg> Edit Jadwal Akan Datang</h3>
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                            <path d="m15 5 4 4" />
+                        </svg> Edit Jadwal Akan Datang</h3>
                     <button class="modal-close" @click="closeModal()"><i class="lucide-x"></i></button>
                 </div>
                 <form method="POST" :action="'/jadwal-akan-datang/' + editData.id">
                     @csrf @method('PUT')
                     <div class="modal-body">
-                        <div class="fg"><label>Judul Kegiatan</label><input type="text" name="judul" required x-model="editData.judul"></div>
+                        <div class="fg"><label>Judul Kegiatan</label><input type="text" name="judul" required
+                                x-model="editData.judul"></div>
                         <div class="fg-row">
-                            <div class="fg"><label>Tanggal Mulai</label><input type="date" name="tanggal_mulai" required x-model="editData.tanggal_mulai"></div>
-                            <div class="fg"><label>Tanggal Selesai</label><input type="date" name="tanggal_selesai" required x-model="editData.tanggal_selesai"></div>
+                            <div class="fg"><label>Tanggal Mulai</label><input type="date" name="tanggal_mulai" required
+                                    x-model="editData.tanggal_mulai"></div>
+                            <div class="fg"><label>Tanggal Selesai</label><input type="date" name="tanggal_selesai" required
+                                    x-model="editData.tanggal_selesai"></div>
                         </div>
                         <div class="fg-check">
                             <input type="checkbox" id="fd_edit_u" x-model="editFullday">
@@ -433,24 +518,29 @@
                             <label for="fd_edit_u">Seharian (fullday)</label>
                         </div>
                         <div class="fg-row" x-show="!editFullday" x-cloak>
-                            <div class="fg"><label>Jam Mulai</label><input type="time" name="jam_mulai" x-model="editData.jam_mulai"></div>
-                            <div class="fg"><label>Jam Selesai</label><input type="time" name="jam_selesai" x-model="editData.jam_selesai"></div>
+                            <div class="fg"><label>Jam Mulai</label><input type="time" name="jam_mulai"
+                                    x-model="editData.jam_mulai"></div>
+                            <div class="fg"><label>Jam Selesai</label><input type="time" name="jam_selesai"
+                                    x-model="editData.jam_selesai"></div>
                         </div>
-                        <div class="fg"><label>Keterangan</label><textarea name="keterangan" x-model="editData.keterangan" placeholder="Opsional"></textarea></div>
+                        <div class="fg"><label>Keterangan</label><textarea name="keterangan" x-model="editData.keterangan"
+                                placeholder="Opsional"></textarea></div>
                     </div>
                     <div class="modal-foot">
                         <button type="button" class="btn-cancel" @click="closeModal()">Batal</button>
-                        <button type="submit" class="btn btn-dark"><i class="lucide-check" style="font-size:12px"></i> Perbarui</button>
+                        <button type="submit" class="btn btn-dark"><i class="lucide-check" style="font-size:12px"></i>
+                            Perbarui</button>
                     </div>
                 </form>
             </div>
         </div>
 
         <!-- ── Modal Tambah Dadakan ─────────────────────────────────────
-             Jadwal Dadakan = HARI INI saja, tanggal di-set otomatis oleh server.
-             Field: Judul, Fullday, Jam Selesai (jika tidak fullday), Keterangan
-        ─────────────────────────────────────────────────────────────── -->
-        <div x-show="activeModal === 'dadakanAdd'" x-cloak class="modal-bg" @click.self="closeModal()" x-data="{ fullday: true }">
+                 Jadwal Dadakan = HARI INI saja, tanggal di-set otomatis oleh server.
+                 Field: Judul, Fullday, Jam Selesai (jika tidak fullday), Keterangan
+            ─────────────────────────────────────────────────────────────── -->
+        <div x-show="activeModal === 'dadakanAdd'" x-cloak class="modal-bg" @click.self="closeModal()"
+            x-data="{ fullday: true }">
             <div class="modal" @click.stop>
                 <div class="modal-head">
                     <h3><i class="lucide-alert-triangle" style="color:#be123c"></i> Tambah Jadwal Dadakan</h3>
@@ -458,7 +548,8 @@
                 </div>
                 <div class="modal-notice">
                     <i class="lucide-calendar-x2"></i>
-                    Jadwal dadakan otomatis berlaku untuk <strong>hari ini</strong> — {{ now()->translatedFormat('l, d F Y') }}
+                    Jadwal dadakan otomatis berlaku untuk <strong>hari ini</strong> —
+                    {{ now()->translatedFormat('l, d F Y') }}
                 </div>
                 <form method="POST" action="/jadwal-dadakan">
                     @csrf
@@ -475,16 +566,19 @@
                         <div class="fg" x-show="!fullday" x-cloak>
                             <label>Diperkirakan hadir kembali pukul</label>
                             <input type="time" name="jam_selesai" placeholder="Contoh: 10:30">
-                            <div style="font-size:11px;color:#a8a29e;margin-top:4px">Jadwal dadakan dimulai dari sekarang sampai jam yang diisi di atas</div>
+                            <div style="font-size:11px;color:#a8a29e;margin-top:4px">Jadwal dadakan dimulai dari sekarang
+                                sampai jam yang diisi di atas</div>
                         </div>
                         <div class="fg">
                             <label>Keterangan Tambahan</label>
-                            <textarea name="keterangan" placeholder="Opsional — Contoh: Masih di jalan karena macet di Jl. Sudirman"></textarea>
+                            <textarea name="keterangan"
+                                placeholder="Opsional — Contoh: Masih di jalan karena macet di Jl. Sudirman"></textarea>
                         </div>
                     </div>
                     <div class="modal-foot">
                         <button type="button" class="btn-cancel" @click="closeModal()">Batal</button>
-                        <button type="submit" class="btn btn-red"><i class="lucide-alert-triangle" style="font-size:12px"></i> Simpan Jadwal Dadakan</button>
+                        <button type="submit" class="btn btn-red"><i class="lucide-alert-triangle"
+                                style="font-size:12px"></i> Simpan Jadwal Dadakan</button>
                     </div>
                 </form>
             </div>
@@ -494,7 +588,11 @@
         <div x-show="activeModal === 'dadakanEdit'" x-cloak class="modal-bg" @click.self="closeModal()">
             <div class="modal" @click.stop>
                 <div class="modal-head">
-                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg> Edit Jadwal Dadakan</h3>
+                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="#be123c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                            <path d="m15 5 4 4" />
+                        </svg> Edit Jadwal Dadakan</h3>
                     <button class="modal-close" @click="closeModal()"><i class="lucide-x"></i></button>
                 </div>
                 <form method="POST" :action="'/jadwal-dadakan/' + editData.id">
@@ -520,7 +618,8 @@
                     </div>
                     <div class="modal-foot">
                         <button type="button" class="btn-cancel" @click="closeModal()">Batal</button>
-                        <button type="submit" class="btn btn-dark"><i class="lucide-check" style="font-size:12px"></i> Perbarui</button>
+                        <button type="submit" class="btn btn-dark"><i class="lucide-check" style="font-size:12px"></i>
+                            Perbarui</button>
                     </div>
                 </form>
             </div>
@@ -531,22 +630,22 @@
 @endsection
 
 @push('scripts')
-<script>
-    function addRipple(event, el) {
-        const rect = el.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        const size = Math.max(rect.width, rect.height) * 2;
-        const span = document.createElement('span');
-        span.classList.add('ripple-el');
-        span.style.cssText = `width:${size}px;height:${size}px;left:${x - size/2}px;top:${y - size/2}px`;
-        el.appendChild(span);
-        span.addEventListener('animationend', () => span.remove());
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', e => addRipple(e, btn));
+    <script>
+        function addRipple(event, el) {
+            const rect = el.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            const size = Math.max(rect.width, rect.height) * 2;
+            const span = document.createElement('span');
+            span.classList.add('ripple-el');
+            span.style.cssText = `width:${size}px;height:${size}px;left:${x - size / 2}px;top:${y - size / 2}px`;
+            el.appendChild(span);
+            span.addEventListener('animationend', () => span.remove());
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', e => addRipple(e, btn));
+            });
         });
-    });
-</script>
+    </script>
 @endpush

@@ -241,6 +241,7 @@
                                     <span class="sl w">Jadwal Mingguan — <span x-text="hariCari"></span></span>
                                     <span class="sn w" x-text="mingguanFiltered.length"></span>
                                 </div>
+                                <div class="table-responsive">
                                 <table class="wt">
                                     <thead>
                                         <tr>
@@ -263,6 +264,7 @@
                                         </template>
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
                         </template>
 
@@ -358,6 +360,7 @@
                                     </button>
                                 </div>
                                 <div x-show="openW" x-cloak style="overflow:hidden" x-transition.duration.250ms>
+                                    <div class="table-responsive">
                                     <table class="wt">
                                         <thead>
                                             <tr>
@@ -385,6 +388,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    </div>
                                 </div>
                             </div>
                         @endif

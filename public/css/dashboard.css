@@ -345,3 +345,22 @@
 @keyframes modalIn     { from { opacity: 0; transform: scale(.94) translateY(10px) } to { opacity: 1; transform: scale(1) translateY(0) } }
 @keyframes overlayIn   { from { opacity: 0 } to { opacity: 1 } }
 @keyframes successSlide{ from { opacity: 0; transform: translateX(-8px) } to { opacity: 1; transform: translateX(0) } }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVENESS
+   ══════════════════════════════════════════════════════════ */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+}
+
+@media (max-width: 480px) {
+    .fg-row {
+        grid-template-columns: 1fr;
+    }
+    .wa-form input[type=tel] {
+        width: 100%;
+    }
+}
