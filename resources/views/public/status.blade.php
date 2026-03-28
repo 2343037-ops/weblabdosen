@@ -11,7 +11,6 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <meta http-equiv="refresh" content="60">
     <link rel="stylesheet" href="/css/status.css">
 
 </head>
