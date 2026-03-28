@@ -102,16 +102,7 @@ body {
     gap: 12px
 }
 
-.hdr-ico {
-    width: 36px;
-    height: 36px;
-    background: rgba(255, 255, 255, .1);
-    border-radius: 8px;
-    display: grid;
-    place-items: center;
-    color: #94a3b8;
-    font-size: 17px;
-}
+
 
 .hdr h1 {
     font-size: 17px;
