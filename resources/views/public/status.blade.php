@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -11,7 +11,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <meta http-equiv="refresh" content="120">
+    <meta http-equiv="refresh" content="30">
     <link rel="stylesheet" href="/css/status.css">
 
 </head>
@@ -75,6 +75,25 @@
                 $hasUpcoming = $dosen->jadwalAkanDatang->count() > 0;
                 $hasWeekly = $dosen->jadwalMingguan->count() > 0;
                 $hariMap = ['Monday' => 'Senin', 'Tuesday' => 'Selasa', 'Wednesday' => 'Rabu', 'Thursday' => 'Kamis', 'Friday' => 'Jumat', 'Saturday' => 'Sabtu', 'Sunday' => 'Minggu'];
+                // Format tanggal ke Y-m-d agar tidak terkena timezone UTC dari serialisasi Carbon
+                $jadwalAkanDatangJs = $dosen->jadwalAkanDatang->map(fn($j) => [
+                    'judul'          => $j->judul,
+                    'tanggal_mulai'  => $j->tanggal_mulai->format('Y-m-d'),
+                    'tanggal_selesai'=> $j->tanggal_selesai->format('Y-m-d'),
+                    'is_fullday'     => $j->is_fullday,
+                    'jam_mulai'      => $j->jam_mulai,
+                    'jam_selesai'    => $j->jam_selesai,
+                    'keterangan'     => $j->keterangan,
+                ]);
+                $jadwalDadakanJs = $dosen->jadwalDadakan->map(fn($j) => [
+                    'judul'          => $j->judul,
+                    'tanggal_mulai'  => $j->tanggal_mulai->format('Y-m-d'),
+                    'tanggal_selesai'=> $j->tanggal_selesai->format('Y-m-d'),
+                    'is_fullday'     => $j->is_fullday,
+                    'jam_mulai'      => $j->jam_mulai,
+                    'jam_selesai'    => $j->jam_selesai,
+                    'keterangan'     => $j->keterangan,
+                ]);
             @endphp
             <div class="db" id="dosen-{{ $idx }}" x-data="{
                                                         openW: false,
@@ -88,15 +107,15 @@
                                                         doSearch() {
                                                             if (!this.cari) { this.searching = false; return; }
                                                             this.searching = true;
-                                                            let d = new Date(this.cari);
+                                                            let [y,m,dd] = this.cari.split('-').map(Number); let d = new Date(y, m-1, dd);
                                                             let days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
                                                             this.hariCari = days[d.getDay()];
-                                                            this.tglLabel = this.hariCari + ', ' + d.getDate() + ' ' + ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'][d.getMonth()] + ' ' + d.getFullYear();
+                                                            this.tglLabel = this.hariCari + ', ' + dd + ' ' + ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'][m-1] + ' ' + y;
 
                                                             let ds = this.cari;
                                                             this.mingguanFiltered = @js($dosen->jadwalMingguan).filter(j => j.hari === this.hariCari);
-                                                            this.akanDatangFiltered = @js($dosen->jadwalAkanDatang).filter(j => ds >= j.tanggal_mulai.substring(0,10) && ds <= j.tanggal_selesai.substring(0,10));
-                                                            this.dadakanFiltered = @js($dosen->jadwalDadakan).filter(j => ds >= j.tanggal_mulai.substring(0,10) && ds <= j.tanggal_selesai.substring(0,10));
+                                                            this.akanDatangFiltered = @js($jadwalAkanDatangJs).filter(j => ds >= j.tanggal_mulai && ds <= j.tanggal_selesai);
+                                                            this.dadakanFiltered = @js($jadwalDadakanJs).filter(j => ds >= j.tanggal_mulai && ds <= j.tanggal_selesai);
                                                         },
                                                         resetSearch() { this.cari = ''; this.searching = false; }
                                                     }">
@@ -381,15 +400,17 @@
     </main>
 
     <footer class="ft">
-        <p>Halaman diperbarui otomatis setiap 2 menit</p>
-        <p style="margin-top:4px">Untuk dosen: <a href="{{ route('login') }}">Login ke Dashboard <i
-                    class="lucide-arrow-right" style="font-size:11px"></i></a></p>
+        <p id="live-indicator" style="display:flex;align-items:center;justify-content:center;gap:6px">
+            <span style="width:7px;height:7px;border-radius:50%;background:#16a34a;display:inline-block;animation:livePulse 1.5s ease-in-out infinite"></span>
+            Status diperbarui otomatis — <span id="next-update">10</span>s
+        </p>
+        <p style="margin-top:4px">Untuk dosen: <a href="{{ route('login') }}">Login ke Dashboard <i class="lucide-arrow-right" style="font-size:11px"></i></a></p>
         <div class="ln"></div>
         <p>&copy; {{ date('Y') }} Lab Komputer — STMIK Widya Cipta Dharma, Samarinda</p>
     </footer>
 
     <script>
-        // ── Ripple helper (works on any element with overflow:hidden) ──
+        // ── Ripple helper ──
         function addRipple(event, el) {
             const rect = el.getBoundingClientRect();
             const x = event.clientX - rect.left;
@@ -408,7 +429,96 @@
                 el.style.animationDelay = (i * 0.08 + 0.1) + 's';
             });
         });
+
+        // ══════════════════════════════════════════════
+        //  REALTIME STATUS POLLING — update setiap 10s
+        //  Fetch /api/dosen-status → update badge & card
+        //  tanpa full page reload
+        // ══════════════════════════════════════════════
+        (function startRealtime() {
+            const INTERVAL = 10; // detik
+            let countdown = INTERVAL;
+
+            // Countdown display
+            const counter = document.getElementById('next-update');
+            setInterval(() => {
+                countdown--;
+                if (counter) counter.textContent = countdown < 0 ? INTERVAL : countdown;
+            }, 1000);
+
+            async function syncStatus() {
+                try {
+                    const res = await fetch('/api/dosen-status', { cache: 'no-store' });
+                    if (!res.ok) return;
+                    const data = await res.json();
+
+                    // Buat map nidn → status
+                    const statusMap = {};
+                    data.forEach(d => statusMap[d.nidn] = d.status);
+
+                    // Update top status CARDS (.sc)
+                    document.querySelectorAll('.cards .sc').forEach(card => {
+                        const nidnEl = card.querySelector('.nd');
+                        if (!nidnEl) return;
+                        const nidn = nidnEl.textContent.replace('NIDN:', '').trim();
+                        const status = statusMap[nidn];
+                        if (!status) return;
+
+                        const isOk = status === 'Di Ruangan';
+                        card.classList.toggle('ok', isOk);
+                        card.classList.toggle('away', !isOk);
+
+                        const bdg = card.querySelector('.bdg');
+                        if (bdg) {
+                            bdg.className = 'bdg ' + (isOk ? 'ok' : 'away');
+                            // Preserve dot span, update text
+                            const dot = bdg.querySelector('.dt');
+                            bdg.textContent = status;
+                            if (dot) bdg.prepend(dot);
+                        }
+                    });
+
+                    // Update status badge di detail dosen (.db)
+                    document.querySelectorAll('.db').forEach(db => {
+                        // Ambil nidn dari elemen .nidn-val atau dari text
+                        const nidnEl = db.querySelector('.di .dm span:last-child') ||
+                                       db.querySelector('[data-nidn]');
+                        if (!nidnEl) return;
+                        const nidn = (nidnEl.dataset && nidnEl.dataset.nidn)
+                            ? nidnEl.dataset.nidn
+                            : nidnEl.textContent.replace('NIDN:', '').trim();
+                        const status = statusMap[nidn];
+                        if (!status) return;
+
+                        const isOk = status === 'Di Ruangan';
+                        // Update .st-badge atau .bdg-ok/.bdg-away di detail
+                        const stBdg = db.querySelector('.st-badge, .st-bdg');
+                        if (stBdg) {
+                            stBdg.className = 'st-badge ' + (isOk ? 'ok' : 'away');
+                            const dot = stBdg.querySelector('span');
+                            stBdg.textContent = status;
+                            if (dot) stBdg.prepend(dot);
+                        }
+                    });
+
+                    countdown = INTERVAL;
+                    if (counter) counter.textContent = countdown;
+
+                } catch(e) {
+                    // Gagal polling — tidak crash, akan coba lagi berikutnya
+                }
+            }
+
+            // Jalankan pertama kali setelah 10 detik, lalu setiap 10 detik
+            setInterval(syncStatus, INTERVAL * 1000);
+        })();
     </script>
+    <style>
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: .4; transform: scale(1.4); }
+        }
+    </style>
 </body>
 
 </html>
