@@ -13,7 +13,9 @@ class JadwalController extends Controller
 {
     private function getDosen()
     {
-        return Dosen::where('email', Auth::user()->email)->firstOrFail();
+        $dosen = Dosen::fromAuth();
+        abort_if(!$dosen, 404, 'Data dosen tidak ditemukan.');
+        return $dosen;
     }
 
     private function syncAfterChange(Dosen $dosen): void

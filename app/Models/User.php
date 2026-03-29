@@ -13,4 +13,13 @@ class User extends Authenticatable
     {
         return $this->role === 'dosen';
     }
+
+    /**
+     * Relasi ke data profil dosen.
+     * Satu akun user memiliki satu data dosen.
+     */
+    public function dosen()
+    {
+        return $this->hasOne(Dosen::class, 'user_id');
+    }
 }

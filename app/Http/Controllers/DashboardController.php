@@ -18,7 +18,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $dosen = Dosen::where('email', $user->email)->first();
+        $dosen = Dosen::fromAuth();
         $hariIni = now()->locale('id')->isoFormat('dddd');
 
         if (!$dosen) return view('dashboard.dosen', compact('user', 'dosen', 'hariIni'))->with('error', 'Data dosen tidak ditemukan');
@@ -60,7 +60,7 @@ class DashboardController extends Controller
     public function updateStatus(Request $request)
     {
         $user = Auth::user();
-        $dosen = Dosen::where('email', $user->email)->first();
+        $dosen = Dosen::fromAuth();
         if (!$dosen) return back()->with('error', 'Data dosen tidak ditemukan');
 
         // Update mode (otomatis/manual)
@@ -86,7 +86,7 @@ class DashboardController extends Controller
     public function updateProfil(Request $request)
     {
         $user = Auth::user();
-        $dosen = Dosen::where('email', $user->email)->first();
+        $dosen = Dosen::fromAuth();
         if (!$dosen) return back()->with('error', 'Data dosen tidak ditemukan');
 
         $request->validate([

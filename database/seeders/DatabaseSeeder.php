@@ -17,16 +17,17 @@ class DatabaseSeeder extends Seeder
         // ============================================================
         // USERS (Dosen Login)
         // ============================================================
-        User::create(['name' => 'Ivan Haristyawan', 'email' => 'ivan.haristyawan@wicida.ac.id', 'password' => Hash::make('password'), 'role' => 'dosen']);
-        User::create(['name' => 'Ahmad Fajri', 'email' => 'ahmad.fajri@wicida.ac.id', 'password' => Hash::make('password'), 'role' => 'dosen']);
-        User::create(['name' => 'Rizki Galang Rahmadani', 'email' => 'rizki.galang@wicida.ac.id', 'password' => Hash::make('password'), 'role' => 'dosen']);
+        $userIvan  = User::create(['name' => 'Ivan Haristyawan',       'email' => 'ivan.haristyawan@wicida.ac.id', 'password' => Hash::make('password'), 'role' => 'dosen']);
+        $userAhmad = User::create(['name' => 'Ahmad Fajri',            'email' => 'ahmad.fajri@wicida.ac.id',      'password' => Hash::make('password'), 'role' => 'dosen']);
+        $userRizki = User::create(['name' => 'Rizki Galang Rahmadani', 'email' => 'rizki.galang@wicida.ac.id',     'password' => Hash::make('password'), 'role' => 'dosen']);
 
         // ============================================================
-        // DOSEN
+        // DOSEN (dengan user_id FK eksplisit)
         // ============================================================
-        Dosen::create(['id' => 'DSN001', 'nama' => 'Ivan Haristyawan, S.T., M.M.', 'nidn' => '1108117701', 'jabatan' => 'Kepala Lab', 'email' => 'ivan.haristyawan@wicida.ac.id']);
-        Dosen::create(['id' => 'DSN002', 'nama' => 'Ahmad Fajri, S.Kom., M.Kom', 'nidn' => '1116088202', 'jabatan' => 'Staf Lab', 'email' => 'ahmad.fajri@wicida.ac.id']);
-        Dosen::create(['id' => 'DSN003', 'nama' => 'Rizki Galang Rahmadani, S.Kom., M.Kom', 'nidn' => '1116088201', 'jabatan' => 'Staf Lab', 'email' => 'rizki.galang@wicida.ac.id']);
+        Dosen::create(['id' => 'DSN001', 'user_id' => $userIvan->id,  'nama' => 'Ivan Haristyawan, S.T., M.M.',          'nidn' => '1108117701', 'jabatan' => 'Kepala Lab', 'email' => 'ivan.haristyawan@wicida.ac.id']);
+        Dosen::create(['id' => 'DSN002', 'user_id' => $userAhmad->id, 'nama' => 'Ahmad Fajri, S.Kom., M.Kom',            'nidn' => '1116088202', 'jabatan' => 'Staf Lab',   'email' => 'ahmad.fajri@wicida.ac.id']);
+        Dosen::create(['id' => 'DSN003', 'user_id' => $userRizki->id, 'nama' => 'Rizki Galang Rahmadani, S.Kom., M.Kom', 'nidn' => '1116088201', 'jabatan' => 'Staf Lab',   'email' => 'rizki.galang@wicida.ac.id']);
+
 
         // ============================================================
         // JADWAL MINGGUAN

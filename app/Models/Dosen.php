@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class Dosen extends Model
@@ -10,8 +11,28 @@ class Dosen extends Model
     protected $table = 'dosen';
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = ['id', 'nama', 'nidn', 'jabatan', 'email', 'telepon', 'status', 'status_mode'];
+    protected $fillable = ['id', 'user_id', 'nama', 'nidn', 'jabatan', 'email', 'telepon', 'status', 'status_mode'];
 
+    // ─── Relasi ke User (akun login) ───────────────────────
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // ─── Helper: ambil dosen dari user yang sedang login ───
+    public static function fromAuth(): ?self
+    {
+        $user = Auth::user();
+        if (!$user) return null;
+
+        // Prioritas: cari lewat user_id (FK eksplisit)
+        if ($user->dosen) return $user->dosen;
+
+        // Fallback: cari lewat email (untuk data lama sebelum migrasi)
+        return self::where('email', $user->email)->first();
+    }
+
+    // ─── Relasi ke jadwal ────────────────────────────────────
     public function jadwalMingguan()
     {
         return $this->hasMany(JadwalMingguan::class, 'dosen_id');
