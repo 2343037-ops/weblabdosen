@@ -51,7 +51,22 @@ class DashboardController extends Controller
             })
             ->orderBy('tanggal_mulai')->get();
 
-        return view('dashboard.dosen', compact('user', 'dosen', 'hariIni', 'jadwalMingguan', 'jadwalAkanDatang', 'jadwalDadakan'));
+        $riwayatAkanDatang = $dosen->jadwalAkanDatang()
+            ->where('tanggal_selesai', '<', $today)
+            ->orderByDesc('tanggal_selesai')->get();
+
+        $riwayatDadakan = $dosen->jadwalDadakan()
+            ->where(function($q) use ($today, $nowTime) {
+                $q->where('tanggal_selesai', '<', $today)
+                  ->orWhere(function($q2) use ($today, $nowTime) {
+                      $q2->where('tanggal_selesai', '=', $today)
+                         ->where('is_fullday', false)
+                         ->where('jam_selesai', '<', $nowTime);
+                  });
+            })
+            ->orderByDesc('tanggal_selesai')->get();
+
+        return view('dashboard.dosen', compact('user', 'dosen', 'hariIni', 'jadwalMingguan', 'jadwalAkanDatang', 'jadwalDadakan', 'riwayatAkanDatang', 'riwayatDadakan'));
     }
 
     /**
@@ -81,20 +96,51 @@ class DashboardController extends Controller
     }
 
     /**
-     * Update profil dosen (nomor telepon)
+     * Update profil lengkap dosen
      */
     public function updateProfil(Request $request)
     {
-        $user = Auth::user();
+        $user  = Auth::user();
         $dosen = Dosen::fromAuth();
         if (!$dosen) return back()->with('error', 'Data dosen tidak ditemukan');
 
         $request->validate([
-            'telepon' => 'nullable|string|max:20',
+            'nama'           => 'required|string|max:100',
+            'nidn'           => 'nullable|string|max:20',
+            'nik'            => 'nullable|string|max:20',
+            'jabatan'        => 'nullable|string|max:100',
+            'ruangan'        => 'nullable|string|max:100',
+            'telepon'        => 'nullable|string|max:20',
+            'tampilkan_nidn' => 'nullable|boolean',
+            'tampilkan_nik'  => 'nullable|boolean',
+            'email'          => 'required|email|max:100',
+            'password'       => 'nullable|string|min:6|confirmed',
         ]);
 
-        $dosen->update(['telepon' => $request->telepon]);
-        return back()->with('success_profil', 'Nomor WhatsApp berhasil disimpan');
+        // Update data dosen
+        $dosen->update([
+            'nama'           => $request->nama,
+            'nidn'           => $request->nidn,
+            'nik'            => $request->nik,
+            'jabatan'        => $request->jabatan,
+            'ruangan'        => $request->ruangan,
+            'telepon'        => $request->telepon,
+            'tampilkan_nidn' => $request->boolean('tampilkan_nidn'),
+            'tampilkan_nik'  => $request->boolean('tampilkan_nik'),
+            'email'          => $request->email,
+        ]);
+
+        // Update email pada tabel users
+        if ($user && $user->email !== $request->email) {
+            $user->update(['email' => $request->email]);
+        }
+
+        // Update password jika diisi
+        if ($request->filled('password')) {
+            $user->update(['password' => bcrypt($request->password)]);
+        }
+
+        return back()->with('success_profil', 'Profil berhasil diperbarui');
     }
 
     /**
@@ -106,21 +152,8 @@ class DashboardController extends Controller
         $today   = now()->toDateString();
         $nowTime = now()->format('H:i:s');
 
-        // Auto-cleanup: hapus jadwal dadakan yang sudah benar-benar kadaluarsa
-        // - Fullday: tanggal_selesai < hari ini
-        // - Non-fullday: tanggal_selesai < hari ini ATAU (tanggal_selesai = hari ini DAN jam_selesai < sekarang)
-        foreach (Dosen::all() as $d) {
-            $d->jadwalDadakan()
-              ->where(function($q) use ($today, $nowTime) {
-                  $q->where('tanggal_selesai', '<', $today)
-                    ->orWhere(function($q2) use ($today, $nowTime) {
-                        $q2->where('tanggal_selesai', '=', $today)
-                           ->where('is_fullday', false)
-                           ->where('jam_selesai', '<', $nowTime);
-                    });
-              })
-              ->delete();
-
+        // [SEBELUMNYA ADA AUTO-DELETE DI SINI, SEKARANG DIHAPUS KARENA BUTUH FITUR RIWAYAT]
+        foreach (\App\Models\Dosen::all() as $d) {
             // Sync status setelah cleanup
             $d->syncStatusFromJadwal();
         }
@@ -164,17 +197,7 @@ class DashboardController extends Controller
         $nowTime = now()->format('H:i:s');
 
         foreach (Dosen::all() as $d) {
-            // Hapus dadakan kadaluarsa sebelum sync
-            $d->jadwalDadakan()
-              ->where(function($q) use ($today, $nowTime) {
-                  $q->where('tanggal_selesai', '<', $today)
-                    ->orWhere(function($q2) use ($today, $nowTime) {
-                        $q2->where('tanggal_selesai', '=', $today)
-                           ->where('is_fullday', false)
-                           ->where('jam_selesai', '<', $nowTime);
-                    });
-              })
-              ->delete();
+            // Hapus auto-delete untuk menjaga fitur Riwayat
 
             $d->syncStatusFromJadwal();
         }

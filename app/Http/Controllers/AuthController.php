@@ -9,7 +9,9 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
-        if (Auth::check()) return redirect('/dashboard');
+        if (Auth::check()) {
+            return Auth::user()->role === 'admin' ? redirect('/admin/dashboard') : redirect('/dashboard');
+        }
         return view('auth.login');
     }
 
@@ -19,6 +21,9 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             $request->session()->regenerate();
+            if (Auth::user()->role === 'admin') {
+                return redirect('/admin/dashboard');
+            }
             return redirect('/dashboard');
         }
 

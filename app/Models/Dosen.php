@@ -11,7 +11,12 @@ class Dosen extends Model
     protected $table = 'dosen';
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = ['id', 'user_id', 'nama', 'nidn', 'jabatan', 'email', 'telepon', 'status', 'status_mode'];
+    protected $fillable = ['id', 'user_id', 'nama', 'nidn', 'nik', 'jabatan', 'email', 'telepon', 'ruangan', 'tampilkan_nidn', 'tampilkan_nik', 'status', 'status_mode'];
+
+    protected $casts = [
+        'tampilkan_nidn' => 'boolean',
+        'tampilkan_nik'  => 'boolean',
+    ];
 
     // ─── Relasi ke User (akun login) ───────────────────────
     public function user()

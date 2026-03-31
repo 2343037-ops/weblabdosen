@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\AdminController;
 
 // Halaman Publik (Mahasiswa — tanpa login)
 Route::get('/', [DashboardController::class, 'publicPage'])->name('public');
@@ -34,4 +35,30 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/jadwal-dadakan', [JadwalController::class, 'storeDadakan'])->name('jadwal.dadakan.store');
     Route::put('/jadwal-dadakan/{id}', [JadwalController::class, 'updateDadakan'])->name('jadwal.dadakan.update');
     Route::delete('/jadwal-dadakan/{id}', [JadwalController::class, 'destroyDadakan'])->name('jadwal.dadakan.destroy');
+});
+
+// Admin (auth + admin required)
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/dosen', [AdminController::class, 'storeDosen'])->name('admin.dosen.store');
+    Route::put('/dosen/{id}', [AdminController::class, 'updateDosen'])->name('admin.dosen.update');
+    Route::delete('/dosen/{id}', [AdminController::class, 'destroyDosen'])->name('admin.dosen.destroy');
+
+    // Kelola Jadwal Dosen oleh Admin
+    Route::get('/dosen/{id}/jadwal', [AdminController::class, 'manageJadwal'])->name('admin.dosen.jadwal');
+    
+    // Admin Jadwal Mingguan
+    Route::post('/dosen/{id}/jadwal-mingguan', [AdminController::class, 'storeMingguan'])->name('admin.jadwal.mingguan.store');
+    Route::put('/dosen/{id}/jadwal-mingguan/{jadwalId}', [AdminController::class, 'updateMingguan'])->name('admin.jadwal.mingguan.update');
+    Route::delete('/dosen/{id}/jadwal-mingguan/{jadwalId}', [AdminController::class, 'destroyMingguan'])->name('admin.jadwal.mingguan.destroy');
+
+    // Admin Jadwal Akan Datang
+    Route::post('/dosen/{id}/jadwal-akan-datang', [AdminController::class, 'storeAkanDatang'])->name('admin.jadwal.akan-datang.store');
+    Route::put('/dosen/{id}/jadwal-akan-datang/{jadwalId}', [AdminController::class, 'updateAkanDatang'])->name('admin.jadwal.akan-datang.update');
+    Route::delete('/dosen/{id}/jadwal-akan-datang/{jadwalId}', [AdminController::class, 'destroyAkanDatang'])->name('admin.jadwal.akan-datang.destroy');
+
+    // Admin Jadwal Dadakan
+    Route::post('/dosen/{id}/jadwal-dadakan', [AdminController::class, 'storeDadakan'])->name('admin.jadwal.dadakan.store');
+    Route::put('/dosen/{id}/jadwal-dadakan/{jadwalId}', [AdminController::class, 'updateDadakan'])->name('admin.jadwal.dadakan.update');
+    Route::delete('/dosen/{id}/jadwal-dadakan/{jadwalId}', [AdminController::class, 'destroyDadakan'])->name('admin.jadwal.dadakan.destroy');
 });

@@ -26,10 +26,37 @@
             -webkit-font-smoothing: antialiased
         }
 
-        /* NAVBAR */
+        /* ANIMATIONS */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px) }
+            to { opacity: 1; transform: translateY(0) }
+        }
+        @keyframes sweepLight {
+            0% { right: -100% }
+            20% { right: 100% }
+            100% { right: 100% }
+        }
+
+        /* NAVBAR (HEADER) */
         .nav {
             background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-            padding: 0
+            padding: 24px 0;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInDown 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        .nav::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            pointer-events: none;
+            animation: sweepLight 5s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-in {
@@ -39,24 +66,28 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 52px
+            gap: 16px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
 
         .nav-l {
             display: flex;
             align-items: center;
-            gap: 10px
+            gap: 12px
         }
 
         .nav-ico {
             color: #93c5fd;
-            font-size: 17px
+            font-size: 20px
         }
 
         .nav-l span {
-            font-size: 14px;
+            font-size: 17px;
             font-weight: 700;
-            color: #f1f5f9
+            color: #ffffff;
+            letter-spacing: -.2px
         }
 
         .nav-r {
@@ -126,19 +157,48 @@
         [x-cloak] {
             display: none !important
         }
+
+        /* LAYOUT & FOOTER */
+        html, body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .app-ft {
+            margin-top: 60px;
+            padding: 40px 20px 30px;
+            background: #fff;
+            border-top: 1px solid #e5e1dc;
+            text-align: center;
+            font-size: 13.5px;
+            color: #64748b;
+        }
+
+        .app-ft p {
+            margin: 0 0 8px 0;
+        }
     </style>
     @stack('styles')
 </head>
 
 <body>
 
+    @if(request('iframe') != '1')
     <nav class="nav">
         <div class="nav-in">
             <div class="nav-l">
                 <i class="lucide-calendar-days nav-ico"></i>
-                <span>Dasboard Dosen</span>
+                <span>{{ Auth::check() && Auth::user()->role === 'admin' ? 'Dashboard Admin' : 'Dashboard Dosen' }}</span>
             </div>
             <div class="nav-r">
+                @if(Auth::check() && Auth::user()->role === 'admin' && request()->routeIs('admin.dosen.jadwal'))
+                    <a href="{{ route('admin.dashboard') }}" class="nav-out" style="background: rgba(255,255,255,.1);"><i class="lucide-arrow-left"></i> Kembali</a>
+                @endif
                 <a href="/" class="nav-pub"><i class="lucide-globe"></i> Halaman Publik</a>
                 <form method="POST" action="{{ route('logout') }}" style="margin:0">
                     @csrf
@@ -147,10 +207,17 @@
             </div>
         </div>
     </nav>
+    @endif
 
-    <main class="mx" style="padding-top:24px;padding-bottom:40px">
+    <main class="mx" style="padding-top:{{ request('iframe') == '1' ? '0' : '24px' }};padding-bottom:40px">
         @yield('content')
     </main>
+
+    @if(request('iframe') != '1')
+    <footer class="app-ft">
+        <p>&copy; {{ date('Y') }} Lab Komputer — STMIK Widya Cipta Dharma, Samarinda</p>
+    </footer>
+    @endif
 
     @stack('scripts')
 </body>
